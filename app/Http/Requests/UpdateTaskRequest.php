@@ -26,7 +26,7 @@ class UpdateTaskRequest extends FormRequest
         return [
             "name"          =>  "required|min:2|max:200",
             "project_id"    =>  "required|numeric|exists:projects,id",
-            "priority"      =>  "required|numeric|min:1"
+            "priority"      =>  "nullable|numeric|min:1"
         ];
     }
 }

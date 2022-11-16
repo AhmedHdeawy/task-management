@@ -76,6 +76,11 @@ class TaskController extends Controller
     {
         DB::beginTransaction();
         try {
+
+            $max_position = Task::max('priority') + 1;
+
+            dd($max_position);
+
             $data = $request->only(['name', 'project_id', 'priority']);
 
             $task = $this->taskRepository->create($data);

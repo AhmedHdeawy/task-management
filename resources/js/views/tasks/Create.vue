@@ -44,7 +44,7 @@ export default {
             errors: [],
             projects: [],
             name: null,
-            priority: 1,
+            priority: null,
             project_id: null,
         }
     },

@@ -26,7 +26,7 @@ class CreateTaskRequest extends FormRequest
         return [
             "project_id"    =>  "required|numeric|exists:projects,id",
             "name"          =>  "required|min:2|max:200",
-            "priority"      =>  "required|numeric|min:1"
+            "priority"      =>  "nullable|numeric|min:1"
         ];
     }
 }

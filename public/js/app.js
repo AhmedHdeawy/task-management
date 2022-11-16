@@ -5464,7 +5464,7 @@ __webpack_require__.r(__webpack_exports__);
       errors: [],
       projects: [],
       name: null,
-      priority: 1,
+      priority: null,
       project_id: null
     };
   },
