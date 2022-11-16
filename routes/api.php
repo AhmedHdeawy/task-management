@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\V1\TaskController;
 use App\Http\Controllers\API\V1\ProjectController;
 
 /*
@@ -15,6 +16,10 @@ use App\Http\Controllers\API\V1\ProjectController;
 |
 */
 
-Route::group(['prefix' => 'projects'], function () {
-    Route::resource('/', ProjectController::class);
+Route::group(['as' => 'projects.'], function () {
+    Route::resource('projects', ProjectController::class);
+});
+
+Route::group(['as' => 'tasks.'], function () {
+    Route::resource('tasks', TaskController::class);
 });

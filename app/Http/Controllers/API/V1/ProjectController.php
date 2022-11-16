@@ -35,6 +35,17 @@ class ProjectController extends Controller
         $projects = $this->projectRepository->all();
         return $this->jsonResponse(200, __('Projects Retrieved Successfully.'), ProjectResource::collection($projects));
     }
+    
+    
+    /**
+     * Get All Projects.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(Project $project)
+    {
+        $projects = $this->projectRepository->all();
+        return $this->jsonResponse(200, __('Projects Retrieved Successfully.'), ProjectResource::collection($projects));
+    }
 
     /**
      * store
@@ -62,7 +73,7 @@ class ProjectController extends Controller
     public function update(Project $project, UpdateProjectRequest $request)
     {
         $data = $request->only(['name']);
-
+        
         $project = $this->projectRepository->update($project->id, $data);
 
         return $this->jsonResponse(200, __('Projects Retrieved Successfully.'), new ProjectResource($project));

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProjectRequest extends FormRequest
+class UpdateTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,9 @@ class UpdateProjectRequest extends FormRequest
      */
     public function rules()
     {
-        // dd(request()->route('project')->id);
+        $id = 1;
         return [
-            "name"  =>  "required|min:2|max:200|unique:projects,name,". request()->route('project')->id . ",id"
+            "name"  =>  "required|min:2|max:200|unique:tasks,name,". $id . ",id"
         ];
     }
 }

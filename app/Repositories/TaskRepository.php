@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectRepository
+class TaskRepository
 {
 
     /**
@@ -17,11 +17,11 @@ class ProjectRepository
 
     public function __construct()
     {
-        $this->model = new Project();
+        $this->model = new Task();
     }
 
     /**
-     * Create New Project In DB.
+     * Create New Task In DB.
      * @param $data
      * @return array|Application|Translator|string|null
      */
@@ -32,7 +32,7 @@ class ProjectRepository
     
     
     /**
-     * Create New Project In DB.
+     * Create New Task In DB.
      * @param $data
      * @return array|Application|Translator|string|null
      */
@@ -45,7 +45,7 @@ class ProjectRepository
     
     
     /**
-     * Update Project Data
+     * Update Task Data
      * @return array|Application|Translator|string|null
      */
     public function show(int $id)
@@ -55,15 +55,15 @@ class ProjectRepository
     
     
     /**
-     * Update Project Data
+     * Update Task Data
      * @param $id
      * @param $data
      * @return array|Application|Translator|string|null
      */
     public function update(int $id, array $data)
     {
-        $this->model->find($id)->update($data);
+        $model = $this->model->find($id)->update($data);
         
-        return $this->model->find($id);
+        return $model;
     }
 }
