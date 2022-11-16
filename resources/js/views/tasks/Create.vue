@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="priority" class="form-label">Priority</label>
+                        <label for="priority" class="form-label">Leave it if you need to update priority automatically to the next order</label>
                         <input type="text" class="form-control" v-model="priority" id="priority">
                     </div>
 

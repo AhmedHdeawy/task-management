@@ -49,7 +49,7 @@ export default {
             errors: [],
             task: {
                 name: null,
-                priority: 1,
+                priority: null,
                 project_id: null,
             },
             task_id: null,
