@@ -23,9 +23,10 @@ class UpdateTaskRequest extends FormRequest
      */
     public function rules()
     {
-        $id = 1;
         return [
-            "name"  =>  "required|min:2|max:200|unique:tasks,name,". $id . ",id"
+            "name"          =>  "required|min:2|max:200|unique:tasks,name,". request()->route('task')->id . ",id",
+            "project_id"    =>  "required|numeric|exists:projects,id",
+            "priority"      =>  "required|numeric|min:1"
         ];
     }
 }

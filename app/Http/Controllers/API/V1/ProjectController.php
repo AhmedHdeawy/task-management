@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\V1;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Traits\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProjectResource;
 use App\Repositories\ProjectRepository;
@@ -57,9 +59,21 @@ class ProjectController extends Controller
      */
     public function store(CreateProjectRequest $request)
     {
-        $data = $request->only(['name']);
+        DB::beginTransaction();
+        try {
+            $data = $request->only(['name']);
 
-        $project = $this->projectRepository->create($data);
+            $project = $this->projectRepository->create($data);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            Log::error("Error While Creating New Project", ['data' => $request->all(), 'msg' => $th->getMessage(), 'trace' => $th->__toString()]);
+
+            throw new \Exception("Error Processing Request", 1);
+            
+        }
 
         return $this->jsonResponse(200, "Project Created Successfully.", new ProjectResource($project));
         
@@ -74,9 +88,20 @@ class ProjectController extends Controller
      */
     public function update(Project $project, UpdateProjectRequest $request)
     {
-        $data = $request->only(['name']);
-        
-        $project = $this->projectRepository->update($project->id, $data);
+        DB::beginTransaction();
+        try {
+            $data = $request->only(['name']);
+
+            $project = $this->projectRepository->update($project->id, $data);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            Log::error("Error While Updating a Project", [ 'id' => $project->id, 'msg' => $th->getMessage(), 'trace' => $th->__toString()]);
+
+            throw new \Exception("Error Processing Request", 1);
+        }
 
         return $this->jsonResponse(200, "Project Updated Successfully.", new ProjectResource($project));
         
@@ -91,7 +116,18 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        $project = $this->projectRepository->delete($project->id);
+        DB::beginTransaction();
+        try {
+            $project = $this->projectRepository->delete($project->id);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            Log::error("Error While Deleting a Project", ['id' => $project->id, 'msg' => $th->getMessage(), 'trace' => $th->__toString()]);
+
+            throw new \Exception("Error Processing Request", 1);
+        }
 
         return $this->jsonResponse(200, "Project Deleted Successfully.");
         

@@ -24,7 +24,9 @@ class CreateTaskRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"  =>  "required|min:2|max:200|unique:tasks,name"
+            "project_id"    =>  "required|numeric|exists:projects,id",
+            "name"          =>  "required|min:2|max:200|unique:tasks,name",
+            "priority"      =>  "required|numeric|min:1"
         ];
     }
 }
