@@ -27,7 +27,18 @@ class TaskRepository
      */
     public function all()
     {
-        return $this->model->all();
+        return $this->model->orderBy('priority')->get();
+    }
+    
+    
+    /**
+     * Create New Project In DB.
+     * @param $data
+     * @return Model
+     */
+    public function allByProject($id)
+    {
+        return $this->model->where('project_id', $id)->orderBy('priority')->get();
     }
 
 

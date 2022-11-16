@@ -3,9 +3,9 @@
         <h1 class="display-5 fw-bold mb-5 text-primary">Projects</h1>
         <div class="col-lg-6 mx-auto mt-5 text-start">
             <div class="mb-2">
-                <button type="button" class="btn btn-primary btn-lg">
+                <button type="button" class="btn btn-success btn-lg">
                     <i class="bi bi-bag-plus-fill"></i>
-                    Create Project
+                    <router-link tag="span" to="/projects/create">Create Project</router-link>
                 </button>
             </div>
             <table class="table table-bordered table-hover table-primary" v-if="projects.length > 0">
@@ -25,7 +25,9 @@
                         <td> {{ project.created_at }} </td>
                         <td> {{ project.tasks_count }} </td>
                         <td>
-                            <button type="button" class="btn btn-primary">Tasks</button>
+                            <button type="button" class="btn btn-primary">
+                                <router-link tag="span" :to="{ name: 'tasks', params: { id: project.id }}">Tasks</router-link>
+                            </button>
                             <button type="button" class="btn btn-danger">
                                 <i class="bi bi-trash3"></i>
                             </button>
@@ -33,21 +35,13 @@
                     </tr>
                 </tbody>
             </table>
-
         </div>
-
-        <Create />
     </div>
-
 </template>
 <script>
 
-import Create from "./Create.vue"
 export default {
-    name: "Projects_List",
-    components: {
-        Create
-    },
+    name: "List",
     data() {
         return {
             projects: [],

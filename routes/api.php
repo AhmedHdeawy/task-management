@@ -21,4 +21,5 @@ Route::group(['as' => 'projects.'], function () {
 
 Route::group(['as' => 'tasks.'], function () {
     Route::resource('tasks', TaskController::class);
+    Route::get('tasks-by-projects/{project}', [TaskController::class, 'tasksByProjects']);
 });

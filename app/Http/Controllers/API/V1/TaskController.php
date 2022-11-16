@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Models\Task;
+use App\Models\Project;
 use App\Http\Traits\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -48,6 +49,20 @@ class TaskController extends Controller
     {
         $tasks = $this->taskRepository->all();
         return $this->jsonResponse(200, "Task Retrieved Successfully.", TaskResource::collection($tasks));
+    }
+    
+    
+    /**
+     * Get All Tasks.
+     * @param  Project $task
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function tasksByProjects(Project $project)
+    {
+        $tasks = $this->taskRepository->allByProject($project->id);
+
+        return $this->jsonResponse(200, "Task Retrieved Successfully.", ['tasks' => TaskResource::collection($tasks), 'project' => $project]);
     }
 
     /**
