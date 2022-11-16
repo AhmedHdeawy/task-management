@@ -5,9 +5,15 @@ alos you can reorder the tasks using drag and drop
 
 ## Installation
 
-```bash
+make a copy of env file and change DB creds
+```
 cp .env-exampl .env
+```
 
+then
+
+
+```
 composer install
 
 npm inatll
@@ -17,7 +23,6 @@ php artisan migrate
 php artisan opimize
 
 npm run dev
-
 ```
 
 ## Run the project
