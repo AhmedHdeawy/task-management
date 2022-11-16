@@ -27,6 +27,9 @@
                         <td> {{ task.name }} </td>
                         <td> {{ task.created_at }} </td>
                         <td>
+                            <button type="button" class="btn btn-primary">
+                                <router-link tag="span" :to="{ name: 'edit_task', params: { id: task.id }}">Edit</router-link>
+                            </button>
                             <button @click.prevent="deleteTask(task.id)" type="button" class="btn btn-danger">
                                 <i class="bi bi-trash3"></i>
                             </button>

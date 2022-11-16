@@ -47,8 +47,9 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $tasks = $this->taskRepository->all();
-        return $this->jsonResponse(200, "Task Retrieved Successfully.", TaskResource::collection($tasks));
+        $task = $this->taskRepository->show($task->id);
+
+        return $this->jsonResponse(200, "Task Retrieved Successfully.", new TaskResource($task));
     }
     
     
