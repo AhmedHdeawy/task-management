@@ -36,7 +36,7 @@ class TaskRepository
      * @param $data
      * @return Model
      */
-    public function allByTask($id)
+    public function allByProject($id)
     {
         return $this->model->where('project_id', $id)->orderBy('priority')->get();
     }

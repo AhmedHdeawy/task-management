@@ -34,6 +34,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div v-else class="alert alert-danger" role="alert">
+                No Tasks for this project, please create one
+            </div>
             <div class="mt-2">
                 <button type="button" class="btn btn-primary btn-lg" @click.prevent="$router.go(-1)">Back To Projects</button>
             </div>

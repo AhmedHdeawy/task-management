@@ -5564,7 +5564,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "px-4 py-5 my-5 text-center"
+    staticClass: "px-4 py-2 my-2 mt-4 text-center"
   }, [_c("h1", {
     staticClass: "display-5 fw-bold"
   }, [_vm._v("Task Management")])]);
@@ -6013,7 +6013,12 @@ var render = function render() {
     }, [_c("i", {
       staticClass: "bi bi-trash3"
     })])])]);
-  }), 0)]) : _vm._e(), _vm._v(" "), _c("div", {
+  }), 0)]) : _c("div", {
+    staticClass: "alert alert-danger",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n            No Tasks for this project, please create one\n        ")]), _vm._v(" "), _c("div", {
     staticClass: "mt-2"
   }, [_c("button", {
     staticClass: "btn btn-primary btn-lg",
