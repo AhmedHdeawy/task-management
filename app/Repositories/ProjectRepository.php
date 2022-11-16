@@ -27,7 +27,7 @@ class ProjectRepository
      */
     public function all()
     {
-        return $this->model->all();
+        return $this->model->with('tasks')->get();
     }
     
     
