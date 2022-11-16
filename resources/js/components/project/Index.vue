@@ -1,9 +1,13 @@
 <template>
-
     <div class="px-4 py-5 my-5 text-center">
         <h1 class="display-5 fw-bold mb-5 text-primary">Projects</h1>
-        <div class="col-lg-6 mx-auto mt-5">
-            
+        <div class="col-lg-6 mx-auto mt-5 text-start">
+            <div class="mb-2">
+                <button type="button" class="btn btn-primary btn-lg">
+                    <i class="bi bi-bag-plus-fill"></i>
+                    Create Project
+                </button>
+            </div>
             <table class="table table-bordered table-hover table-primary" v-if="projects.length > 0">
                 <thead>
                     <tr>
@@ -31,16 +35,23 @@
             </table>
 
         </div>
+
+        <Create />
     </div>
 
 </template>
 <script>
 
+import Create from "./Create.vue"
 export default {
     name: "Projects_List",
+    components: {
+        Create
+    },
     data() {
         return {
-            projects: []
+            projects: [],
+            create: false
         }
     },
     created() {
