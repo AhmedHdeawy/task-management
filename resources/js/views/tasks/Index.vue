@@ -3,7 +3,7 @@
         <h1 class="display-5 fw-bold mb-5 text-primary"> {{ project.name }} Tasks</h1>
 
         <div class="col-lg-6 mx-auto mt-5 text-start">
-            <div class="alert alert-danger" role="alert" v-if="deleteDone">
+            <div class="alert alert-success" role="alert" v-if="deleteDone">
                 Task Deleted Successfully
             </div>
             <div class="mb-2">
@@ -17,7 +17,7 @@
             <table class="table table-bordered table-hover table-primary" v-if="tasks.length > 0">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Sort</th>
                         <th scope="col">Priority</th>
                         <th scope="col">Name</th>
                         <th scope="col">Created At</th>
