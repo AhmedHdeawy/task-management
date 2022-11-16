@@ -5347,6 +5347,19 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    deleteProject: function deleteProject(id) {
+      var _this2 = this;
+      var check = confirm("Are you sure ?");
+      if (check) {
+        axios["delete"]('/api/projects/' + id).then(function (res) {
+          _this2.fetchProjects(_this2.$route.params.id);
+          _this2.deleteDone = true;
+        })["catch"](function (err) {
+          console.log(err);
+          _this2.$router.go();
+        });
+      }
     }
   }
 });
@@ -5364,7 +5377,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony import */ var _components_Header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Header.vue */ "./resources/js/components/Header.vue");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    Header: _components_Header_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
 
 /***/ }),
 
@@ -5416,15 +5435,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_Header_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Header.vue */ "./resources/js/components/Header.vue");
-/* harmony import */ var _components_project_List_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/project/List.vue */ "./resources/js/components/project/List.vue");
-
+/* harmony import */ var _components_project_List_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/project/List.vue */ "./resources/js/components/project/List.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Projects",
   components: {
-    Header: _components_Header_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    "List": _components_project_List_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    "List": _components_project_List_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -5617,7 +5633,20 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("Tasks")])], 1), _vm._v(" "), _vm._m(1, true)])]);
+    }, [_vm._v("Tasks")])], 1), _vm._v(" "), _c("button", {
+      staticClass: "btn btn-danger",
+      attrs: {
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.deleteProject(project.id);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "bi bi-trash3"
+    })])])]);
   }), 0)]) : _vm._e()])]);
 };
 var staticRenderFns = [function () {
@@ -5644,17 +5673,6 @@ var staticRenderFns = [function () {
       scope: "col"
     }
   }, [_vm._v("Actions")])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("button", {
-    staticClass: "btn btn-danger",
-    attrs: {
-      type: "button"
-    }
-  }, [_c("i", {
-    staticClass: "bi bi-trash3"
-  })]);
 }];
 render._withStripped = true;
 
@@ -5676,7 +5694,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("router-view")], 1);
+  return _c("div", [_c("Header"), _vm._v(" "), _c("div", {
+    staticClass: "b-example-divider"
+  }), _vm._v(" "), _c("router-view")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5796,9 +5816,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("Header"), _vm._v(" "), _c("div", {
-    staticClass: "b-example-divider"
-  }), _vm._v(" "), _c("List")], 1);
+  return _c("div", [_c("List")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -6068,7 +6086,7 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/ExampleComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

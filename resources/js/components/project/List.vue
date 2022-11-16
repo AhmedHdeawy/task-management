@@ -28,7 +28,7 @@
                             <button type="button" class="btn btn-primary">
                                 <router-link tag="span" :to="{ name: 'tasks', params: { id: project.id }}">Tasks</router-link>
                             </button>
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" @click.prevent="deleteProject(project.id)">
                                 <i class="bi bi-trash3"></i>
                             </button>
                         </td>
@@ -59,6 +59,20 @@ export default {
                 }).catch((err) => {
                     console.log(err);
                 })
+        },
+
+        deleteProject(id) {
+            var check = confirm("Are you sure ?");
+            if (check) {
+                axios.delete('/api/projects/' + id)
+                    .then(res => {
+                        this.fetchProjects(this.$route.params.id);
+                        this.deleteDone = true;
+                    }).catch((err) => {
+                        console.log(err);
+                        this.$router.go();
+                    })
+            }
         }
     }
 }

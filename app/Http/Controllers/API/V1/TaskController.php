@@ -129,7 +129,7 @@ class TaskController extends Controller
     {
         DB::beginTransaction();
         try {
-            $task = $this->taskRepository->delete($task->id);
+            $this->taskRepository->delete($task->id);
 
             DB::commit();
         } catch (\Throwable $th) {

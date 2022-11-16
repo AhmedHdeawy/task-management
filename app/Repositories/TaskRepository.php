@@ -21,7 +21,7 @@ class TaskRepository
     }
 
     /**
-     * Create New Project In DB.
+     * Create New Task In DB.
      * @param $data
      * @return Model
      */
@@ -32,18 +32,18 @@ class TaskRepository
     
     
     /**
-     * Create New Project In DB.
+     * Create New Task In DB.
      * @param $data
      * @return Model
      */
-    public function allByProject($id)
+    public function allByTask($id)
     {
         return $this->model->where('project_id', $id)->orderBy('priority')->get();
     }
 
 
     /**
-     * Create New Project In DB.
+     * Create New Task In DB.
      * @param $data
      * @return Model
      */
@@ -53,7 +53,7 @@ class TaskRepository
     }
 
     /**
-     * Update Project Data
+     * Update Task Data
      * @return Model
      */
     public function show(int $id)
@@ -63,7 +63,7 @@ class TaskRepository
 
 
     /**
-     * Update Project Data
+     * Update Task Data
      * @param $id
      * @param $data
      * @return Model
@@ -77,12 +77,23 @@ class TaskRepository
 
 
     /**
-     * Deleet Project
+     * Deleet Task
      * @param $id
      * @return void
      */
     public function delete(int $id)
     {
         $this->model->find($id)->delete();
+    }
+    
+    
+    /**
+     * Deleet Task
+     * @param $id
+     * @return void
+     */
+    public function deleteForProjects(int $id)
+    {
+        $this->model->where('project_id', $id)->delete();
     }
 }

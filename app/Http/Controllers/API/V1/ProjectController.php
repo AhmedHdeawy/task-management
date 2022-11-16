@@ -12,20 +12,26 @@ use App\Http\Resources\ProjectResource;
 use App\Repositories\ProjectRepository;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Repositories\TaskRepository;
 
 class ProjectController extends Controller
 {
     use JsonResponse;
 
     /**
-     * This Is Variable For Article Repository For Using Here.
      * @var $projectRepository
      */
     protected $projectRepository;
 
-    public function __construct(ProjectRepository $projectRepository)
+    /**
+     * @var $projectRepository
+     */
+    protected $taskRepository;
+
+    public function __construct(ProjectRepository $projectRepository, TaskRepository $taskRepository)
     {
         $this->projectRepository = $projectRepository;
+        $this->taskRepository = $taskRepository;
     }
 
     /**
@@ -118,7 +124,9 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $project = $this->projectRepository->delete($project->id);
+            $this->projectRepository->delete($project->id);
+            
+            $this->taskRepository->deleteForProjects($project->id);
 
             DB::commit();
         } catch (\Throwable $th) {

@@ -1,7 +1,5 @@
 <template>
     <div>
-        <Header />
-        <div class="b-example-divider"></div>
         <List />
     </div>
 
@@ -11,13 +9,11 @@
 
 <script>
 
-import Header from "../../components/Header.vue";
 import List from "../../components/project/List.vue"
 
 export default {
     name: "Projects",
     components: {
-        Header,
         "List": List
     }
 

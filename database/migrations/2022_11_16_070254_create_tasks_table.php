@@ -20,7 +20,7 @@ class CreateTasksTable extends Migration
             $table->unsignedMediumInteger('priority')->default(1);
 
             $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
 
             $table->timestamps();
         });
