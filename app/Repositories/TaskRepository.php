@@ -21,49 +21,57 @@ class TaskRepository
     }
 
     /**
-     * Create New Task In DB.
+     * Create New Project In DB.
      * @param $data
-     * @return array|Application|Translator|string|null
+     * @return Model
      */
     public function all()
     {
         return $this->model->all();
     }
-    
-    
+
+
     /**
-     * Create New Task In DB.
+     * Create New Project In DB.
      * @param $data
-     * @return array|Application|Translator|string|null
+     * @return Model
      */
     public function create(array $data)
     {
-        $model = $this->model->create($data);
-        
-        return $model;
+        return $this->model->create($data);
     }
-    
-    
+
     /**
-     * Update Task Data
-     * @return array|Application|Translator|string|null
+     * Update Project Data
+     * @return Model
      */
     public function show(int $id)
     {
         return $this->model->find($id);
     }
-    
-    
+
+
     /**
-     * Update Task Data
+     * Update Project Data
      * @param $id
      * @param $data
-     * @return array|Application|Translator|string|null
+     * @return Model
      */
     public function update(int $id, array $data)
     {
-        $model = $this->model->find($id)->update($data);
-        
-        return $model;
+        $this->model->find($id)->update($data);
+
+        return $this->model->find($id);
+    }
+
+
+    /**
+     * Deleet Project
+     * @param $id
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        $this->model->find($id)->delete();
     }
 }

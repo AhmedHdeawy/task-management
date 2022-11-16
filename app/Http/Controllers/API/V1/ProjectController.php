@@ -33,18 +33,20 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = $this->projectRepository->all();
-        return $this->jsonResponse(200, __('Projects Retrieved Successfully.'), ProjectResource::collection($projects));
+        return $this->jsonResponse(200, "Projects Retrieved Successfully.", ProjectResource::collection($projects));
     }
-    
-    
+
+
     /**
      * Get All Projects.
+     * @param  Project $project
+     * 
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Project $project)
     {
         $projects = $this->projectRepository->all();
-        return $this->jsonResponse(200, __('Projects Retrieved Successfully.'), ProjectResource::collection($projects));
+        return $this->jsonResponse(200, "Project Retrieved Successfully.", ProjectResource::collection($projects));
     }
 
     /**
@@ -59,14 +61,14 @@ class ProjectController extends Controller
 
         $project = $this->projectRepository->create($data);
 
-        return $this->jsonResponse(200, __('Projects Retrieved Successfully.'), new ProjectResource($project));
+        return $this->jsonResponse(200, "Project Created Successfully.", new ProjectResource($project));
         
     }
-    
-    
+
     /**
      * Update
      *
+     * @param  Project $project
      * @param  UpdateProjectRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -76,7 +78,22 @@ class ProjectController extends Controller
         
         $project = $this->projectRepository->update($project->id, $data);
 
-        return $this->jsonResponse(200, __('Projects Retrieved Successfully.'), new ProjectResource($project));
+        return $this->jsonResponse(200, "Project Updated Successfully.", new ProjectResource($project));
+        
+    }
+   
+   
+    /**
+     * Delete
+     *
+     * @param  UpdateProjectRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Project $project)
+    {
+        $project = $this->projectRepository->delete($project->id);
+
+        return $this->jsonResponse(200, "Project Deleted Successfully.");
         
     }
 }

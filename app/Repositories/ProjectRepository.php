@@ -23,7 +23,7 @@ class ProjectRepository
     /**
      * Create New Project In DB.
      * @param $data
-     * @return array|Application|Translator|string|null
+     * @return Model
      */
     public function all()
     {
@@ -34,19 +34,16 @@ class ProjectRepository
     /**
      * Create New Project In DB.
      * @param $data
-     * @return array|Application|Translator|string|null
+     * @return Model
      */
     public function create(array $data)
     {
-        $model = $this->model->create($data);
-        
-        return $model;
+        return $this->model->create($data);
     }
-    
     
     /**
      * Update Project Data
-     * @return array|Application|Translator|string|null
+     * @return Model
      */
     public function show(int $id)
     {
@@ -58,12 +55,23 @@ class ProjectRepository
      * Update Project Data
      * @param $id
      * @param $data
-     * @return array|Application|Translator|string|null
+     * @return Model
      */
     public function update(int $id, array $data)
     {
         $this->model->find($id)->update($data);
         
         return $this->model->find($id);
+    }
+    
+    
+    /**
+     * Deleet Project
+     * @param $id
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        $this->model->find($id)->delete();
     }
 }

@@ -16,13 +16,13 @@ class TaskController extends Controller
 
     /**
      * This Is Variable For Article Repository For Using Here.
-     * @var $projectRepository
+     * @var $taskRepository
      */
-    protected $projectRepository;
+    protected $taskRepository;
 
-    public function __construct(TaskRepository $projectRepository)
+    public function __construct(TaskRepository $taskRepository)
     {
-        $this->projectRepository = $projectRepository;
+        $this->taskRepository = $taskRepository;
     }
 
     /**
@@ -31,19 +31,21 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $projects = $this->projectRepository->all();
-        return $this->jsonResponse(200, __('Tasks Retrieved Successfully.'), TaskResource::collection($projects));
+        $tasks = $this->taskRepository->all();
+        return $this->jsonResponse(200, "Tasks Retrieved Successfully.", TaskResource::collection($tasks));
     }
-    
-    
+
+
     /**
      * Get All Tasks.
+     * @param  Task $task
+     * 
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Task $project)
+    public function show(Task $task)
     {
-        $projects = $this->projectRepository->all();
-        return $this->jsonResponse(200, __('Tasks Retrieved Successfully.'), TaskResource::collection($projects));
+        $tasks = $this->taskRepository->all();
+        return $this->jsonResponse(200, "Task Retrieved Successfully.", TaskResource::collection($tasks));
     }
 
     /**
@@ -56,26 +58,38 @@ class TaskController extends Controller
     {
         $data = $request->only(['name']);
 
-        $project = $this->projectRepository->create($data);
+        $task = $this->taskRepository->create($data);
 
-        return $this->jsonResponse(200, __('Tasks Retrieved Successfully.'), new TaskResource($project));
-        
+        return $this->jsonResponse(200, "Task Created Successfully.", new TaskResource($task));
     }
-    
-    
+
     /**
      * Update
+     *
+     * @param  Task $task
+     * @param  UpdateTaskRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Task $task, UpdateTaskRequest $request)
+    {
+        $data = $request->only(['name']);
+
+        $task = $this->taskRepository->update($task->id, $data);
+
+        return $this->jsonResponse(200, "Task Updated Successfully.", new TaskResource($task));
+    }
+
+
+    /**
+     * Delete
      *
      * @param  UpdateTaskRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Task $project, UpdateTaskRequest $request)
+    public function destroy(Task $task)
     {
-        $data = $request->only(['name']);
+        $task = $this->taskRepository->delete($task->id);
 
-        $project = $this->projectRepository->update($project->id, $data);
-
-        return $this->jsonResponse(200, __('Tasks Retrieved Successfully.'), new TaskResource($project));
-        
+        return $this->jsonResponse(200, "Task Deleted Successfully.");
     }
 }
